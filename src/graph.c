@@ -63,6 +63,7 @@ void DestroyGraph(Graph **g){
     
     for(i = 0; i < tmp->nnodes; i++)
         free(tmp->node[i].feat);
+    free(tmp->node);
     free(tmp->ordered_list_of_nodes);
     free(tmp);
     tmp = NULL;
