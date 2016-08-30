@@ -112,19 +112,19 @@ Graph *ReadGraph(char *file){
         Error(msg, "ReadGraph");
     }
     
-    if(fread(&nnodes, sizeof(int), 1, fp) != 1) Error("Could not read the number of nodes","ReadGraph");
-    if(fread(&nlabels, sizeof(int), 1, fp) != 1) Error("Could not read the number of labels","ReadGraph");
-    if(fread(&nfeats, sizeof(int), 1, fp) != 1) Error("Could not read the number of features","ReadGraph");
+    if(fread(&nnodes, sizeof(int), 1, fp) != 1) Error("Could not read the number of nodes", "ReadGraph");
+    if(fread(&nlabels, sizeof(int), 1, fp) != 1) Error("Could not read the number of labels", "ReadGraph");
+    if(fread(&nfeats, sizeof(int), 1, fp) != 1) Error("Could not read the number of features", "ReadGraph");
     
     g = CreateGraph(nnodes, nfeats);
     g->nlabels = nlabels;
     
     for (i = 0; i < g->nnodes; i++){
-        if(fread(&g->node[i].id, sizeof(int), 1, fp) != 1) Error("Could not read node position","ReadGraph");      
-        if(fread(&g->node[i].truelabel, sizeof(int), 1, fp) != 1) Error("Could not read node true label","ReadGraph");
+        if(fread(&g->node[i].id, sizeof(int), 1, fp) != 1) Error("Could not read node position", "ReadGraph");      
+        if(fread(&g->node[i].truelabel, sizeof(int), 1, fp) != 1) Error("Could not read node true label", "ReadGraph");
 
         for (j = 0; j < g->nfeats; j++)
-            if(fread(&g->node[i].feat[j], sizeof(double), 1, fp) != 1) Error("Could not read node features","ReadGraph");	
+            if(fread(&g->node[i].feat[j], sizeof(double), 1, fp) != 1) Error("Could not read node features", "ReadGraph");	
    }
    fclose(fp);
    

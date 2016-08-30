@@ -5,6 +5,9 @@ int main(int argc, char **argv){
         
         g = CreateGraph(100,2);
         DestroyGraph(&g);
-        
+	
+	g = ReadGraph(argv[1]);
+        DestroyGraph(&g);
+	
         return 0;
 }
