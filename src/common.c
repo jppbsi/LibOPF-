@@ -35,7 +35,7 @@ void Error(char *msg, char *func){
     exit(-1);
 }
 
-/* It allocates a double array of size n
+/* It allocates a double array of size n.
 Parameters:
 n: size of the array */
 double *AllocDoubleArray(int n){

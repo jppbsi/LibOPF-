@@ -25,11 +25,12 @@ typedef struct _Graph {
 Graph *CreateGraph(int nnodes, int nfeats); /* It allocates the graph. */
 void DestroyGraph(Graph **g); /* It deallocates the graph. */
 
-/*void WriteSubgraph(Subgraph *g, char *file); //write subgraph to disk
-Subgraph *ReadSubgraph(char *file);//read subgraph from opf format file
-Subgraph *CopySubgraph(Subgraph *g);//Copy subgraph (does not copy Arcs)
+/* ---------- Input/Output --------------------------------------*/
+void WriteGraph(Graph *g, char *file); /* It writes the graph to disk. */
+Graph *ReadGraph(char *file); /* It reads the graph from an OPF format file. */
+Graph *CopyGraph(Graph *g); /* It copies a graph (it does not copy arcs). */
 
-void CopySNode(SNode *dest, SNode *src, int nfeats); //Copy nodes
+/*void CopySNode(SNode *dest, SNode *src, int nfeats); //Copy nodes
 void SwapSNode(SNode *a, SNode *b); //Swap nodes*/
 
 #endif

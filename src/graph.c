@@ -27,7 +27,7 @@
 #include "graph.h"
 
 /*----------- Constructor and destructor ------------------------*/
-/* It allocates the graph
+/* It allocates the graph.
 Parameters:
 nnodes:number of samples (nodes)
 nefeats: number os features (dimensionality of the feature space) */
@@ -44,8 +44,10 @@ Graph *CreateGraph(int nnodes, int nfeats){
     g->node = NULL; g->node = (Node *)malloc(g->nnodes*sizeof(Node));
     if(!g->node) Error("Cannot allocate nodes", "CreateGraph");
     
-    for(i = 0; i < g->nnodes; i++)
+    for(i = 0; i < g->nnodes; i++){
+        g->node[i].id = i;
         g->node[i].feat = AllocDoubleArray(g->nfeats);
+    }
     
     return g;
 }
@@ -67,4 +69,64 @@ void DestroyGraph(Graph **g){
     free(tmp->ordered_list_of_nodes);
     free(tmp);
     tmp = NULL;
+}
+
+/* ---------- Input/Output --------------------------------------*/
+/* It writes the graph to disk.
+Parameters:
+g: input graph
+file: output file name */
+void WriteGraph(Graph *g, char *file){
+    FILE *fp = NULL;
+    int i, j;
+    
+    if(!g || !file) Error("Invalid input", "WriteGraph");
+
+    fp = fopen(file, "wb");
+    fwrite(&g->nnodes, sizeof(int), 1, fp);
+    fwrite(&g->nlabels, sizeof(int), 1, fp);
+    fwrite(&g->nfeats, sizeof(int), 1, fp);
+    
+    for (i = 0; i < g->nnodes; i++){
+        fwrite(&g->node[i].id, sizeof(int), 1, fp);
+        fwrite(&g->node[i].truelabel, sizeof(int), 1, fp);
+        for (j = 0; j < g->nfeats; j++)
+            fwrite(&g->node[i].feat[j], sizeof(double), 1, fp);
+    }
+    fclose(fp);
+
+}
+
+/* It reads the graph from an OPF format file.
+Parameters:
+file: input file name */
+Graph *ReadGraph(char *file){
+    Graph *g = NULL;
+    FILE *fp = NULL;
+    int i, j, nnodes, nlabels, nfeats;
+    char msg[128];
+    
+    if(!file) Error("Invalid input", "ReadGraph");
+    if((fp = fopen(file, "rb")) == NULL){
+        sprintf(msg, "%s%s", "Unable to open file ", file);
+        Error(msg, "ReadGraph");
+    }
+    
+    if(fread(&nnodes, sizeof(int), 1, fp) != 1) Error("Could not read the number of nodes","ReadGraph");
+    if(fread(&nlabels, sizeof(int), 1, fp) != 1) Error("Could not read the number of labels","ReadGraph");
+    if(fread(&nfeats, sizeof(int), 1, fp) != 1) Error("Could not read the number of features","ReadGraph");
+    
+    g = CreateGraph(nnodes, nfeats);
+    g->nlabels = nlabels;
+    
+    for (i = 0; i < g->nnodes; i++){
+        if(fread(&g->node[i].id, sizeof(int), 1, fp) != 1) Error("Could not read node position","ReadGraph");      
+        if(fread(&g->node[i].truelabel, sizeof(int), 1, fp) != 1) Error("Could not read node true label","ReadGraph");
+
+        for (j = 0; j < g->nfeats; j++)
+            if(fread(&g->node[i].feat[j], sizeof(double), 1, fp) != 1) Error("Could not read node features","ReadGraph");	
+   }
+   fclose(fp);
+   
+   return g;
 }
