@@ -35,7 +35,7 @@ Graph *CreateGraph(int nnodes, int nfeats){
     Graph *g = NULL;
     int i;
     
-    if(nnodes < 0 || nfeats < 0) Error("Invalid input", "CreateGraph");
+    if(nnodes <= 0 || nfeats <= 0) Error("Invalid input", "CreateGraph");
     
     g = (Graph *)malloc(sizeof(Graph));
     g->nnodes = nnodes;

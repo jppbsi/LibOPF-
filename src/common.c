@@ -31,7 +31,7 @@ Parameters:
 msg: message to the user
 func: function where the error has occurred */
 void Error(char *msg, char *func){
-    fprintf(stderr,"Error: %s @ %s.\n", msg, func);
+    fprintf(stderr,"Error: %s @%s.\n", msg, func);
     exit(-1);
 }
 
