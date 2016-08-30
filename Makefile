@@ -29,4 +29,4 @@ opf_train: src/opf_train.c
 
 ## Cleaning-up
 clean:
-	rm -f $(LIB)/lib*.a; rm -f $(OBJ)/*.o 
+	rm -f $(LIB)/lib*.a; rm -f $(OBJ)/*.o; rm -rf  bin/*
