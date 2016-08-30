@@ -9,5 +9,6 @@ int main(int argc, char **argv){
 	g = ReadGraph(argv[1]);
         DestroyGraph(&g);
 	
-        return 0;
+        WriteGraph(g, "temp.opf");
+	return 0;
 }

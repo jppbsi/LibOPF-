@@ -68,7 +68,7 @@ void DestroyGraph(Graph **g){
     free(tmp->node);
     free(tmp->ordered_list_of_nodes);
     free(tmp);
-    tmp = NULL;
+    *g = NULL;
 }
 
 /* ---------- Input/Output --------------------------------------*/
@@ -94,7 +94,6 @@ void WriteGraph(Graph *g, char *file){
             fwrite(&g->node[i].feat[j], sizeof(double), 1, fp);
     }
     fclose(fp);
-
 }
 
 /* It reads the graph from an OPF format file.
