@@ -2,7 +2,6 @@
 #define _GRAPH_H_
 
 #include "common.h"
-#include "set.h"
 
 /*--------- Data types ----------------------------- */
 typedef struct _Node {
@@ -21,8 +20,8 @@ typedef struct _Graph {
 } Graph;
 
 /*----------- Constructor and destructor ------------------------*/
-Graph *CreateGraph(int nnodes); //Allocates nodes without features
-void DestroyGraph(Subgraph **sg); //Deallocates memory for subgraph
+Graph *CreateGraph(int nnodes, int nfeats); // It allocates the graph
+void DestroyGraph(Graph **sg); // It deallocates the graph
 
 /*void WriteSubgraph(Subgraph *g, char *file); //write subgraph to disk
 Subgraph *ReadSubgraph(char *file);//read subgraph from opf format file
@@ -30,4 +29,5 @@ Subgraph *CopySubgraph(Subgraph *g);//Copy subgraph (does not copy Arcs)
 
 void CopySNode(SNode *dest, SNode *src, int nfeats); //Copy nodes
 void SwapSNode(SNode *a, SNode *b); //Swap nodes*/
-#endif // _SUBGRAPH_H_
+
+#endif
