@@ -21,7 +21,8 @@
   <papa.joaopaulo@gmail.com>, Aug 30th 2016
 
   This program is a collection of functions to manage the Optimum-Path Forest (OPF)
-  classifier.*/
+  classifier.
+*/
 
 #include "common.h"
 
@@ -32,4 +33,16 @@ func: function where the error has occurred */
 void Error(char *msg, char *func){
     fprintf(stderr,"Error: %s @ %s.\n", msg, func);
     exit(-1);
+}
+
+/* It allocates a double array of size n
+Parameters:
+n: size of the array */
+double *AllocDoubleArray(int n){
+    double *v = NULL;
+    
+    v = (double *)malloc(n*sizeof(double));
+    if(!v) Error("Cannot allocate memory space", "AllocDoubleArray");
+  
+    return(v);
 }

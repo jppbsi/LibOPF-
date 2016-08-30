@@ -21,7 +21,8 @@
   <papa.joaopaulo@gmail.com>, Aug 30th 2016
 
   This program is a collection of functions to manage the Optimum-Path Forest (OPF)
-  classifier.*/
+  classifier.
+*/
 
 #include "graph.h"
 
@@ -31,7 +32,38 @@ Parameters:
 nnodes:number of samples (nodes)
 nefeats: number os features (dimensionality of the feature space) */
 Graph *CreateGraph(int nnodes, int nfeats){
-    if(nnodes < 0 || nfeats < 0){
-        
-    }
+    Graph *g = NULL;
+    int i;
+    
+    if(nnodes < 0 || nfeats < 0) Error("Invalid input", "CreateGraph");
+    
+    g = (Graph *)malloc(sizeof(Graph));
+    g->nnodes = nnodes;
+    g->nfeats = nfeats;
+    g->ordered_list_of_nodes = (int *) malloc(g->nnodes*sizeof(int));
+    g->node = NULL; g->node = (Node *)malloc(g->nnodes*sizeof(Node));
+    if(!g->node) Error("Cannot allocate nodes", "CreateGraph");
+    
+    for(i = 0; i < g->nnodes; i++)
+        g->node[i].feat = AllocDoubleArray(g->nfeats);
+    
+    return g;
+}
+
+/* It deallocates the graph.
+Parameters:
+g: graph to be deallocated */
+void DestroyGraph(Graph **g){
+    Graph *tmp = NULL;
+    int i;
+    
+    tmp = *g;
+    
+    if(!tmp) Error("Invalid input", "DestroyGraph");
+    
+    for(i = 0; i < tmp->nnodes; i++)
+        free(tmp->node[i].feat);
+    free(tmp->ordered_list_of_nodes);
+    free(tmp);
+    tmp = NULL;
 }

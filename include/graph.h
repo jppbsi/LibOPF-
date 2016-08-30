@@ -5,23 +5,25 @@
 
 /*--------- Data types ----------------------------- */
 typedef struct _Node {
-  int label; // predicted label
-  int root; // id of the root node
-  int pred; // id of predecessor node
-  int truelabel; // true label (if it is known)
-  int id; //index in the feature space
+  int label; /* predicted label */
+  int root; /* id of the root node */
+  int pred; /* id of predecessor node */
+  int truelabel; /* true label (if it is known) */
+  int id; /* index in the feature space */
+  double *feat; /* features */
 }Node;
 
 typedef struct _Graph {
-  Node *node; // sample nodes
-  int nnodes; // number of nodes (samples)
-  int nfeats;  //number of features
-  int nlabels; //number of labels (classes)
+  Node *node; /* sample nodes */
+  int nnodes; /* number of nodes (samples) */
+  int nfeats; /* number of features */
+  int nlabels; /* number of labels (classes) */
+  int *ordered_list_of_nodes; /* ordered (increasing order of cost) list of training nodes to speed up classification */
 } Graph;
 
 /*----------- Constructor and destructor ------------------------*/
-Graph *CreateGraph(int nnodes, int nfeats); // It allocates the graph
-void DestroyGraph(Graph **sg); // It deallocates the graph
+Graph *CreateGraph(int nnodes, int nfeats); /* It allocates the graph. */
+void DestroyGraph(Graph **g); /* It deallocates the graph. */
 
 /*void WriteSubgraph(Subgraph *g, char *file); //write subgraph to disk
 Subgraph *ReadSubgraph(char *file);//read subgraph from opf format file
