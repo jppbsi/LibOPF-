@@ -145,7 +145,7 @@ Graph *CopyGraph(Graph *g){
     cpy->nlabels = g->nlabels;
     
     for(i = 0; i < g->nnodes; i++){
-        cpy->node[i] = CopyNode(g->node[i], g->nfeats);
+        CopyNode(&cpy->node[i], &g->node[i], g->nfeats);
         cpy->ordered_list_of_nodes[i] = g->ordered_list_of_nodes[i];
     }
     
@@ -157,18 +157,13 @@ Parameters:
 dest: destiny node
 src: source node
 nfeats: number of features */
-Node CopyNode(Node src, int nfeats){
-    Node cpy;
-    
-    if(nfeats < 1) Error("Invalid input", "CopyNode");
+void CopyNode(Node *dest, Node *src, int nfeats){
+    if(!src || nfeats < 1) Error("Invalid input", "CopyNode");
         
-    cpy.feat = AllocDoubleArray(nfeats);
-    memcpy(cpy.feat, src.feat, nfeats*sizeof(double));
-    cpy.label = src.label;
-    cpy.truelabel = src.truelabel;
-    cpy.pred = src.pred;
-    cpy.root = src.root;
-    cpy.id = src.id;
-	        
-    return cpy;
+    memcpy(dest->feat, src->feat, nfeats*sizeof(double));
+    dest->label = src->label;
+    dest->truelabel = src->truelabel;
+    dest->pred = src->pred;
+    dest->root = src->root;
+    dest->id = src->id;
 }

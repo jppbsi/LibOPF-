@@ -31,7 +31,7 @@ Graph *ReadGraph(char *file); /* It reads the graph from an OPF format file. */
 
 /* ---------- Auxiliary --------------------------------------*/
 Graph *CopyGraph(Graph *g); /* It copies a graph (it does not copy arcs). */
-Node CopyNode(Node src, int nfeats); /* It copies a given node. */
+void CopyNode(Node *cpy, Node *src, int nfeats); /* It copies a given node. */
 
 /*
 void SwapSNode(SNode *a, SNode *b); //Swap nodes*/
