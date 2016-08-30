@@ -129,3 +129,46 @@ Graph *ReadGraph(char *file){
    
    return g;
 }
+
+/* ---------- Auxiliary --------------------------------------*/
+/* It copies a graph (it does not copy arcs).
+Parameters:
+g: graph to be copied
+*/
+Graph *CopyGraph(Graph *g){
+    Graph *cpy = NULL;
+    int i;
+    
+    if(!g) Error("Invalid input", "CopyGraph");
+    
+    cpy = CreateGraph(g->nnodes, g->nfeats);
+    cpy->nlabels = g->nlabels;
+    
+    for(i = 0; i < g->nnodes; i++){
+        cpy->node[i] = CopyNode(g->node[i], g->nfeats);
+        cpy->ordered_list_of_nodes[i] = g->ordered_list_of_nodes[i];
+    }
+    
+    return cpy;   
+}
+
+/* It copies a given node.
+Parameters:
+dest: destiny node
+src: source node
+nfeats: number of features */
+Node CopyNode(Node src, int nfeats){
+    Node cpy;
+    
+    if(nfeats < 1) Error("Invalid input", "CopyNode");
+        
+    cpy.feat = AllocDoubleArray(nfeats);
+    memcpy(cpy.feat, src.feat, nfeats*sizeof(double));
+    cpy.label = src.label;
+    cpy.truelabel = src.truelabel;
+    cpy.pred = src.pred;
+    cpy.root = src.root;
+    cpy.id = src.id;
+	        
+    return cpy;
+}

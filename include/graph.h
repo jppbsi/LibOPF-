@@ -28,9 +28,12 @@ void DestroyGraph(Graph **g); /* It deallocates the graph. */
 /* ---------- Input/Output --------------------------------------*/
 void WriteGraph(Graph *g, char *file); /* It writes the graph to disk. */
 Graph *ReadGraph(char *file); /* It reads the graph from an OPF format file. */
-Graph *CopyGraph(Graph *g); /* It copies a graph (it does not copy arcs). */
 
-/*void CopySNode(SNode *dest, SNode *src, int nfeats); //Copy nodes
+/* ---------- Auxiliary --------------------------------------*/
+Graph *CopyGraph(Graph *g); /* It copies a graph (it does not copy arcs). */
+Node CopyNode(Node src, int nfeats); /* It copies a given node. */
+
+/*
 void SwapSNode(SNode *a, SNode *b); //Swap nodes*/
 
 #endif

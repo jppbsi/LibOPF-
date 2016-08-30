@@ -1,9 +1,6 @@
 #ifndef _OPF_H_
 #define _OPF_H_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <limits.h>
 #include <time.h>
 #include <math.h>
