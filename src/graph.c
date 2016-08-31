@@ -166,4 +166,5 @@ void CopyNode(Node *dest, Node *src, int nfeats){
     dest->pred = src->pred;
     dest->root = src->root;
     dest->id = src->id;
+    dest->status = src->status;
 }

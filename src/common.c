@@ -26,6 +26,7 @@
 
 #include "common.h"
 
+/*--------- Messages -------------*/
 /* It prints an error message and exits the program.
 Parameters:
 msg: message to the user
@@ -35,6 +36,7 @@ void Error(char *msg, char *func){
     exit(-1);
 }
 
+/*--------- Memory Allocation -------------*/
 /* It allocates a double array of size n.
 Parameters:
 n: size of the array */
@@ -45,4 +47,94 @@ double *AllocDoubleArray(int n){
     if(!v) Error("Cannot allocate memory space", "AllocDoubleArray");
   
     return(v);
+}
+
+/* It allocates an integer array of size n.
+Parameters:
+n: size of the array */
+int *AllocIntArray(int n){
+    int *v = NULL;
+    
+    v = (int *)malloc(n*sizeof(int));
+    if(!v) Error("Cannot allocate memory space", "AllocIntArray");
+  
+    return(v);
+}
+
+/*------------ Number generation -----------*/
+/* The source code to generate random numbers was taken from http://www.physics.drexel.edu/courses/Comp_Phys/Physics-306/random.c. */
+
+static int randx = 0;
+
+/* It generates a random number.
+Parameters:
+idum: input seed number */
+double ran(int *idum){
+    int j;
+    int k;
+    static int idum2 = 123456789;
+    static int iy = 0;
+    static int iv[NTAB];
+    double temp;
+
+    if (*idum <= 0){
+	if (-(*idum) < 1)
+	    *idum = 1;
+	else
+	    *idum = -(*idum);
+	idum2 = (*idum);
+
+	for (j = NTAB+7; j >= 0; j--){
+	    k = (*idum)/IQ1;
+	    *idum = IA1*(*idum-k*IQ1) - k*IR1;
+	    if (*idum < 0) *idum += IM1;
+	    if (j < NTAB) iv[j] = *idum;
+	}
+	iy = iv[0];
+    }
+    k = (*idum)/IQ1;
+    *idum = IA1*(*idum-k*IQ1) - k*IR1;
+    if (*idum < 0) *idum += IM1;
+
+    k = idum2/IQ2;
+    idum2 = IA2*(idum2-k*IQ2)-k*IR2;
+    if (idum2 < 0) idum2 += IM2;
+
+    j = iy/NDIV;
+    iy = iv[j] - idum2;
+    iv[j] = *idum;
+    if (iy < 1) iy += IMM1;
+
+    if ((temp = AM*iy) > RNMX)
+	return RNMX;
+    else
+	return temp;
+}
+
+/* It initializes the random number generator.
+Parameters:
+seed: seed number */
+int seedrandinter(int seed){	
+    if (seed == 0) seed = (int)time(NULL);
+					
+    randx = -abs(seed);
+    return seed;	
+}
+
+/* It returns a random integer number uniformly distributed within [low,high].
+Parameters:
+low: lower boundary
+high: upper boundary */
+int RandomInteger(int low, int high){	
+    if (randx == 0) seedrandinter(0);
+    return (int)(low + (high-low)*((double)ran(&randx)));
+}
+
+/* It returns a random double number uniformly distributed within [low,high].
+Parameters:
+low: lower boundary
+high: upper boundary */
+double RandomDouble(double low, double high){	
+    if (randx == 0) seedrandinter(0);
+    return low + (high-low)*((double)ran(&randx));
 }
