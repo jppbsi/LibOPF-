@@ -11,7 +11,7 @@ typedef struct _Node {
   int truelabel; /* true label (if it is known) */
   int id; /* index in the feature space */
   int status; /* status of the node */
-  double *feat; /* features */
+  float *feat; /* features */
 }Node;
 
 typedef struct _Graph {

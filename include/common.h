@@ -37,13 +37,13 @@
 void Error(char *msg, char *func); /* It prints an error message and exits the program. */
 
 /*--------- Memory Allocation -------------*/
-double *AllocDoubleArray(int n); /* It allocates a double array of size n. */
+float *AllocFloatArray(int n); /* It allocates a double array of size n. */
 int *AllocIntArray(int n); /* It allocates an integer array of size n. */
 
 /*------------ Number generation -----------*/
-double ran(int *idum); /* It generates a random number. */
+float ran(int *idum); /* It generates a random number. */
 int seedrandinter(int seed); /* It initializes the random number generator. */
 int RandomInteger(int low, int high); /* It returns a random integer number uniformly distributed within [low,high]. */
-double RandomDouble(double low, double high); /* It returns a random double number uniformly distributed within [low,high]. */
+float RandomDouble(float low, float high); /* It returns a random double number uniformly distributed within [low,high]. */
 
 #endif

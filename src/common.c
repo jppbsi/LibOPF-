@@ -37,13 +37,13 @@ void Error(char *msg, char *func){
 }
 
 /*--------- Memory Allocation -------------*/
-/* It allocates a double array of size n.
+/* It allocates a float array of size n.
 Parameters:
 n: size of the array */
-double *AllocDoubleArray(int n){
-    double *v = NULL;
+float *AllocFloatArray(int n){
+    float *v = NULL;
     
-    v = (double *)malloc(n*sizeof(double));
+    v = (float *)malloc(n*sizeof(float));
     if(!v) Error("Cannot allocate memory space", "AllocDoubleArray");
   
     return(v);
@@ -69,13 +69,13 @@ static int randx = 0;
 /* It generates a random number.
 Parameters:
 idum: input seed number */
-double ran(int *idum){
+float ran(int *idum){
     int j;
     int k;
     static int idum2 = 123456789;
     static int iy = 0;
     static int iv[NTAB];
-    double temp;
+    float temp;
 
     if (*idum <= 0){
 	if (-(*idum) < 1)
@@ -127,14 +127,14 @@ low: lower boundary
 high: upper boundary */
 int RandomInteger(int low, int high){	
     if (randx == 0) seedrandinter(0);
-    return (int)(low + (high-low)*((double)ran(&randx)));
+    return (int)(low + (high-low)*((float)ran(&randx)));
 }
 
-/* It returns a random double number uniformly distributed within [low,high].
+/* It returns a random float number uniformly distributed within [low,high].
 Parameters:
 low: lower boundary
 high: upper boundary */
-double RandomDouble(double low, double high){	
+float RandomFloat(float low, float high){	
     if (randx == 0) seedrandinter(0);
-    return low + (high-low)*((double)ran(&randx));
+    return low + (high-low)*((float)ran(&randx));
 }

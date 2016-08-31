@@ -46,7 +46,7 @@ Graph *CreateGraph(int nnodes, int nfeats){
     
     for(i = 0; i < g->nnodes; i++){
         g->node[i].id = i;
-        g->node[i].feat = AllocDoubleArray(g->nfeats);
+        g->node[i].feat = AllocFloatArray(g->nfeats);
     }
     
     return g;
@@ -91,7 +91,7 @@ void WriteGraph(Graph *g, char *file){
         fwrite(&g->node[i].id, sizeof(int), 1, fp);
         fwrite(&g->node[i].truelabel, sizeof(int), 1, fp);
         for (j = 0; j < g->nfeats; j++)
-            fwrite(&g->node[i].feat[j], sizeof(double), 1, fp);
+            fwrite(&g->node[i].feat[j], sizeof(float), 1, fp);
     }
     fclose(fp);
 }
@@ -123,7 +123,7 @@ Graph *ReadGraph(char *file){
         if(fread(&g->node[i].truelabel, sizeof(int), 1, fp) != 1) Error("Could not read node true label", "ReadGraph");
 
         for (j = 0; j < g->nfeats; j++)
-            if(fread(&g->node[i].feat[j], sizeof(double), 1, fp) != 1) Error("Could not read node features", "ReadGraph");	
+            if(fread(&g->node[i].feat[j], sizeof(float), 1, fp) != 1) Error("Could not read node features", "ReadGraph");	
    }
    fclose(fp);
    
@@ -160,7 +160,7 @@ nfeats: number of features */
 void CopyNode(Node *dest, Node *src, int nfeats){
     if(!src || nfeats < 1) Error("Invalid input", "CopyNode");
         
-    memcpy(dest->feat, src->feat, nfeats*sizeof(double));
+    memcpy(dest->feat, src->feat, nfeats*sizeof(float));
     dest->label = src->label;
     dest->truelabel = src->truelabel;
     dest->pred = src->pred;
