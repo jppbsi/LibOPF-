@@ -23,6 +23,14 @@
 #define NDIV (1+IMM1/NTAB)
 #define EPS 1.e-14
 #define RNMX (1.0-EPS)
+#define WHITE 0
+#define GRAY 1
+#define BLACK 2
+#define MINVALUE 0 /* define queue to remove node with minimum value */
+#define MAXVALUE 1 /* define queue to remove node with maximum value */
+#define FIFOBREAK 0  /* define queue to solve ambiguity by FIFO */
+#define LIFOBREAK 1  /* define queue to solve ambiguity by LIFO */
+#define QSIZE 32768
 
 /*--------- Common operations -------------*/
 #ifndef MAX
@@ -32,6 +40,9 @@
 #ifndef MIN
 #define MIN(x,y) (((x) < (y))?(x):(y))
 #endif
+
+#define SetTieBreak(a,b) a->C.tiebreak=b 
+#define SetRemovalPolicy(a,b) a->C.removal_policy=b 
 
 /*--------- Messages -------------*/
 void Error(char *msg, char *func); /* It prints an error message and exits the program. */
@@ -45,5 +56,8 @@ float ran(int *idum); /* It generates a random number. */
 int seedrandinter(int seed); /* It initializes the random number generator. */
 int RandomInteger(int low, int high); /* It returns a random integer number uniformly distributed within [low,high]. */
 float RandomDouble(float low, float high); /* It returns a random double number uniformly distributed within [low,high]. */
+
+/*--------- Auxiliary Functions -------------*/
+void Change(int *a, int *b); /* It changes content between a and b. */
 
 #endif

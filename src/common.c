@@ -138,3 +138,14 @@ float RandomFloat(float low, float high){
     if (randx == 0) seedrandinter(0);
     return low + (high-low)*((float)ran(&randx));
 }
+
+/*--------- Auxiliary Functions -------------*/
+/* It changes content between a and b.
+Parameters:
+a: variable #1
+b: variable #2 */
+void Change(int *a, int *b){
+    const int c = *a;
+    *a = *b;
+    *b = c;
+}

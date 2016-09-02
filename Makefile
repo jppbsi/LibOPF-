@@ -15,11 +15,15 @@ $(LIB)/libOPF.a: \
 $(OBJ)/opf.o \
 $(OBJ)/graph.o \
 $(OBJ)/common.o \
+$(OBJ)/heap.o \
+$(OBJ)/queue.o \
 
 	ar csr $(LIB)/libOPF.a \
 $(OBJ)/opf.o \
 $(OBJ)/graph.o \
 $(OBJ)/common.o \
+$(OBJ)/heap.o \
+$(OBJ)/queue.o \
 
 $(OBJ)/opf.o: $(SRC)/opf.c
 	$(CC) $(FLAGS) -I $(INCLUDE) -c $(SRC)/opf.c -o $(OBJ)/opf.o
@@ -27,6 +31,10 @@ $(OBJ)/common.o: $(SRC)/common.c
 	$(CC) $(FLAGS) -I $(INCLUDE) -c $(SRC)/common.c -o $(OBJ)/common.o
 $(OBJ)/graph.o: $(SRC)/graph.c
 	$(CC) $(FLAGS) -I $(INCLUDE) -c $(SRC)/graph.c -o $(OBJ)/graph.o
+$(OBJ)/heap.o: $(SRC)/heap.c
+	$(CC) $(FLAGS) -I $(INCLUDE) -c $(SRC)/heap.c -o $(OBJ)/heap.o
+$(OBJ)/queue.o: $(SRC)/queue.c
+	$(CC) $(FLAGS) -I $(INCLUDE) -c $(SRC)/queue.c -o $(OBJ)/queue.o
 
 opf_train: src/opf_train.c
 	$(CC) $(FLAGS) src/opf_train.c -o bin/opf_train -I $(INCLUDE) -L $(LIB) -lOPF -lm;
