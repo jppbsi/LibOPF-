@@ -36,5 +36,11 @@ void DestroyQueue(Queue **Q); /* It deallocates a queue. */
 
 /*--------- Auxiliary Functions -------------*/
 void ResetQueue(Queue *Q); /* It resets the queue. */
+int EmptyQueue(Queue *Q); /* It empties the queue. */
+Queue *GrowQueue(Queue **Q, int nbuckets); /* It grows the queue. */
+void InsertGQueue(Queue **Q, int elem); /* It inserts an element in the queue. */
+int RemoveQueue(Queue *Q); /* It pops from the queue. */
+void RemoveQueueElem(Queue *Q, int elem); /* It removes a specific element from the queue. */
+void UpdateQueue(Queue **Q, int elem, int newvalue); /* It updates a vaue in the queue. */
 
 #endif
