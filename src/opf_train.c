@@ -1,7 +1,7 @@
-#include "graph.h"
+#include "opf.h"
 
 int main(int argc, char **argv){
-	Graph *g = NULL, *tmp = NULL;
+	Graph *g = NULL, *tmp = NULL, *g2 = NULL;
         
         g = CreateGraph(100,2);
         DestroyGraph(&g);
@@ -12,6 +12,10 @@ int main(int argc, char **argv){
 
 	WriteGraph(tmp, "temp.opf");
 	DestroyGraph(&tmp);
-
+	
+	opf_SplitSubgraph(g, &tmp, &g2, 0.1);
+	DestroyGraph(&tmp);
+	DestroyGraph(&g2);
+	
 	return 0;
 }
