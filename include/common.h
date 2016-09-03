@@ -6,6 +6,7 @@
 #include <string.h>
 #include <time.h>
 #include <sys/time.h>
+#include <limits.h>
 
 /*--------- Common definitions -----------*/
 #define NIL -1

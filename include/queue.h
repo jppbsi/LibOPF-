@@ -30,4 +30,11 @@ typedef struct _Queue{ /* Priority queue by Dial implemented as proposed by A. F
   DoublyLinkedLists L;
 }Queue;
 
+/*--------- Memory Allocation -------------*/
+Queue *CreateQueue(int nbuckets, int nelems, int *value); /* It creates an integer-valued queue. */
+void DestroyQueue(Queue **Q); /* It deallocates a queue. */
+
+/*--------- Auxiliary Functions -------------*/
+void ResetQueue(Queue *Q); /* It resets the queue. */
+
 #endif
