@@ -96,7 +96,7 @@ int GetSetSize(Set *S){
 
 /* It makes a copy of the set.
 Parameters:
-S: set to be coppied */
+S: set to be copied */
 Set *CloneSet(Set *S){
     if(!S) Error("Invalid input", "CloneSet");
     
